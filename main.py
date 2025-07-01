@@ -5,12 +5,11 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 from dotenv import load_dotenv
 
 load_dotenv()
-
 openai.api_key = os.getenv("OPENAI_API_KEY")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("هلا! أرسل لي أي شيء، وبرد عليك بـ GPT 🤖")
+    await update.message.reply_text("هلا! أرسل لي أي شيء، وأنا برد عليك باستخدام GPT 🤖")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text
@@ -21,7 +20,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         bot_reply = response['choices'][0]['message']['content']
     except Exception as e:
-        bot_reply = f"حصل خطأ: {e}"
+        bot_reply = f"صار خطأ: {e}"
     await update.message.reply_text(bot_reply)
 
 if __name__ == "__main__":
